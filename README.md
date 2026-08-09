@@ -1,29 +1,57 @@
-# keep-improving
+# Keep Improving
 
-Claude Code skill for continuous, unattended product improvement.
+[🇧🇷 Leia em Português](README.pt.md)
 
-Read this in [Portuguese](README.pt-BR.md).
+A Claude Code skill for continuous product improvement. Point it at a project and it stays on it: fixes bugs, writes missing tests, polishes UI and UX, and drafts features worth building.
 
-## About
+---
 
-You point this skill at a project and it stays on it. It researches what real users say about the product's domain, reads the codebase, fixes bugs, writes missing tests, cleans up rough UI and UX, and drafts new features worth building. It keeps cycling until you say stop.
+## What it does
 
-Two research tools drive it. `last30days` pulls real sentiment from Reddit, Hacker News, X, and GitHub, so the skill knows what people actually complain about, not just what a generic search turns up. `scrapling` fetches full page content when a search snippet isn't enough, useful for docs, changelogs, and competitor products.
+Each cycle: researches the product's domain, reads the codebase, finds what's broken or missing, applies what it safely can, and queues the rest for review.
 
-Every change lands in two buckets. Safe changes, small fixes, missing tests, minor polish, get applied straight to the working tree. Bigger calls, new features, layout changes, dependency bumps, get written up in `TODO IMPROVEMENTS.md` for you to decide on.
+**Safe changes go in right away, uncommitted:** a missing test for shipped code, a bug with a clear single cause, small UI/UX polish, missing alt text or aria labels, confirmed dead code.
 
-One rule sits above all the others: this skill never commits or pushes anything on its own. It edits files and leaves the diff sitting there. You review, you decide what ships, you run the commit. No exceptions, no matter how small or obviously correct a change looks.
+**Sensitive changes go into `TODO IMPROVEMENTS.md`** with the category, source, exact files, reasoning, and risk. New features, layout changes, refactors that cross file boundaries, dependency bumps: all queued, none applied automatically.
 
-## Tags
+The skill stops when you ask, or when there's genuinely nothing left to improve. If context runs out mid-cycle, it updates `TODO IMPROVEMENTS.md` so a new session can resume from there.
 
-`claude-code` `agent-skill` `autonomous-agent` `code-review` `automation` `ai-agent` `developer-tools` `testing` `ux` `product-improvement`
+---
 
-## Files
+## The one rule that matters
 
-- `SKILL.md`: the spec Claude reads when the skill runs
-- `README.md`: this file (English)
-- `README.pt-BR.md`: Portuguese version
+This skill never runs `git commit` or `git push`. It edits files and leaves the diff sitting in your working tree. You review, you decide what ships, you run the commit yourself, no matter how small or obviously correct a change looks.
 
-## Use
+---
 
-Invoke the skill, point it at a project, let it run. It stops when you tell it to, or when it genuinely runs out of things to improve.
+## Research tools
+
+- **[last30days](https://github.com/mvanhorn/last30days-skill)** for the sentiment angle: what people actually say on Reddit, Hacker News, X, and GitHub about the product's domain or the stack in use.
+- **[Scrapling](https://github.com/D4Vinci/Scrapling)** for full page content when a search snippet isn't enough: docs, changelogs, competitor products.
+- Regular web search for everything else.
+
+Installing keep-improving as a plugin auto-installs `last30days`. Without it, the skill still works and skips straight to web search for that part. `scrapling` is a Python library (`pip install scrapling`); the skill uses it if present and falls back to plain web search otherwise.
+
+---
+
+## Use it
+
+**No install needed:**
+> "Read https://github.com/obrenoalvim/keep-improving and follow the Keep Improving skill."
+
+**As a plugin (available in all sessions):**
+```
+/plugin marketplace add obrenoalvim/keep-improving
+/plugin install keep-improving@keep-improving
+```
+
+Then invoke it: "Run Keep Improving on this project."
+
+**Copy the skill file:**
+Copy `skills/keep-improving/SKILL.md` into your skills directory and invoke through your skill system.
+
+---
+
+## Works with
+
+Any codebase with a working tree to edit: web apps, CLIs, libraries, mobile, backend services. Needs git to leave changes uncommitted and diffable.
