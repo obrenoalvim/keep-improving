@@ -27,10 +27,10 @@ This skill never runs `git commit` or `git push`. It edits files and leaves the 
 ## Research tools
 
 - **[last30days](https://github.com/mvanhorn/last30days-skill)** for the sentiment angle: what people actually say on Reddit, Hacker News, X, and GitHub about the product's domain or the stack in use.
+- **[web](https://github.com/obrenoalvim/unblock)** for docs, changelogs, and best-practice references: a 13-tool fallback chain that keeps trying when a search or scrape gets blocked, rate-limited, or comes back empty.
 - **[Scrapling](https://github.com/D4Vinci/Scrapling)** for full page content when a search snippet isn't enough: docs, changelogs, competitor products.
-- Regular web search for everything else.
 
-Installing keep-improving as a plugin auto-installs `last30days`. Without it, the skill still works and skips straight to web search for that part. `scrapling` is a Python library (`pip install scrapling`); the skill uses it if present and falls back to plain web search otherwise.
+Installing keep-improving as a plugin auto-installs `last30days`. Without `last30days`, `web`, or `scrapling` installed, the skill still works and skips straight to a plain web search for that part.
 
 ---
 

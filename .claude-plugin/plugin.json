@@ -1,7 +1,7 @@
 {
   "name": "keep-improving",
   "description": "Autonomous product-improvement loop — researches, fixes bugs, writes missing tests, polishes UI/UX, and proposes new features, applying safe changes directly and queuing sensitive ones in TODO IMPROVEMENTS.md. Never commits or pushes without explicit approval.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Breno Alvim",
     "email": "brenoalvim.dev@gmail.com"

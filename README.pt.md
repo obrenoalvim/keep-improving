@@ -27,10 +27,10 @@ Essa skill nunca roda `git commit` nem `git push`. Ela edita arquivo e deixa o d
 ## Ferramentas de pesquisa
 
 - **[last30days](https://github.com/mvanhorn/last30days-skill)** pro ângulo de sentimento: o que as pessoas falam de verdade no Reddit, Hacker News, X e GitHub sobre o domínio do produto ou a stack usada.
+- **[web](https://github.com/obrenoalvim/unblock)** pra doc, changelog e referência técnica: corrente de 13 ferramentas que continua tentando quando uma busca ou scrape bloqueia, dá rate limit ou volta vazia.
 - **[Scrapling](https://github.com/D4Vinci/Scrapling)** pra puxar página inteira quando um trecho de busca não basta: doc, changelog, produto concorrente.
-- Busca web comum pro resto.
 
-Instalar o keep-improving como plugin já instala o `last30days` junto. Sem ele, a skill ainda funciona e pula direto pra busca web nessa parte. `scrapling` é uma lib Python (`pip install scrapling`); a skill usa se estiver instalada e cai pra busca web comum se não estiver.
+Instalar o keep-improving como plugin já instala o `last30days` junto. Sem `last30days`, `web` ou `scrapling` instalados, a skill ainda funciona e pula direto pra busca web comum nessa parte.
 
 ---
 

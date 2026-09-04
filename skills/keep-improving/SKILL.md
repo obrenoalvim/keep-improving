@@ -2,7 +2,7 @@
 name: keep-improving
 description: Autonomous product-improvement loop — researches, fixes bugs, writes missing tests, polishes UI/UX, and proposes new features, applying safe changes directly and queuing sensitive ones in TODO IMPROVEMENTS.md. Never commits or pushes without explicit approval.
 when_to_use: when the user wants continuous, unattended improvement of a codebase/product until told to stop
-version: 1.0.0
+version: 1.1.0
 languages: all
 ---
 
@@ -31,10 +31,10 @@ When invoked, Keep Improving runs an autonomous loop over the current project:
 ## Research tools
 
 - **`last30days`** — real community signal (Reddit, HN, X, YouTube, GitHub) on the product's domain, competing tools, or complaints about the stack in use. Invoke it first each cycle for the sentiment angle.
-- **`scrapling`** (Python lib, installed via pip) — undetectable scraping for pulling full doc pages, changelogs, competitor UIs, or anything a plain web search returns only snippets of. Use when you need the actual page content, not a search summary.
-- Regular web search — official docs, GitHub issues, Stack Overflow, changelogs.
+- **`web` skill** — reference lookups for the cycle's target: official docs, changelogs, best-practice writeups, GitHub issues/Stack Overflow threads. Use this instead of a raw web search call — it's built to keep going when a search/scrape/crawl gets blocked, rate-limited, or returns empty/garbage, which plain search silently fails on.
+- **`scrapling`** (Python lib, installed via pip) — undetectable scraping for pulling full doc pages, changelogs, competitor UIs, or anything behind a snippet the `web` skill can't fully surface. Use when you need actual page content, not a summary.
 
-Priority per cycle: `last30days` for sentiment → web search for docs/guides → `scrapling` for anything behind a snippet or needing full-page content. Skip a tool silently if it is not installed; do not block the cycle on it.
+Priority per cycle: `last30days` for sentiment → `web` skill for docs/guides/references → `scrapling` for anything still behind a snippet or needing full-page content. Skip a tool silently if it is not installed/available; do not block the cycle on it.
 
 ---
 
@@ -127,7 +127,7 @@ The loop only commits when the user's message explicitly says "commit" or "commi
 
 After each cycle:
 1. `last30days` (if available) for the sentiment/community angle on whatever area this cycle targets
-2. Web search + `scrapling` (if needed) for docs, best practices, prior art
+2. `web` skill for docs, best practices, prior art + `scrapling` (if needed) for full-page content
 3. Read the relevant part of the project
 4. Apply safe changes to the working tree, or add entries to `TODO IMPROVEMENTS.md`
 5. Report the cycle (format below)
